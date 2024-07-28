@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display 속성 테스트</title>
+    <style>
+        * {
+            margin: 0px;
+        }
+
+
+        /* div의 부모는 <body>니까 body에서 3번째 자식이 "여기는 선릉" 블럭임 !! */
+        div:nth-child(3) {
+            background-color: blanchedalmond;
+        }
+
+
+        /* div의 부모는 <body>니까 body에서 4번째 자식이 "유레카 캠퍼스" 블럭임 !! */
+        div:nth-child(4) {
+            width: 300px;  
+            /* inline 설정한 경우 -> inline의 성질만 띰 -> 폭 길이 변화 없음*/
+            /* inline-block 설정한 경우 -> block의 성질도 가짐 -> 폭 길이 변화 가능*/
+
+            background-color: violet;
+        }
+
+        div {
+            /* display: inline; */
+            display: inline-block;
+        }
+        
+        /* 미션: span에 바탕색을 보라색으로 하고, span의 너비를 브라우저의 절반으로 하자!! 
+        
+        브라우저의 절반 -> 백분율~~
+        */
+        span {
+            display: block;
+            background-color: blueviolet;
+            width: 50%;
+        }
+
+
+        p {
+            background-color: aqua;
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h3>inline - block test</h3>
+    <hr>
+    <div>여기는 선릉</div><div>유레카 캠퍼스</div><br><span>으아아아 집가고싶다...</span>
+
+
+    <p>블럭 태그 P</p>
+
+
+    
+</body>
+</html>

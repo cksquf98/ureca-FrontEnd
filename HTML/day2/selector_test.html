@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Type Selector(타입선택자)</title>
+    <style type="text/css">
+      div,p {
+        padding: 10px;
+        margin: 10px;
+        font-weight: bold;
+      }
+
+      div {
+        background: skyblue;
+        color: magenta;
+      }
+
+      p {
+        background: lightgray;
+        color: orange;
+      }
+
+
+      /* 클래스 이름을 통한 Selector */
+      .target1 {
+        background: skyblue;
+        color: magenta;
+      }
+      .target2 {
+        background: lightgray;
+        color: orange;
+      }
+      p.target1 {
+        font-weight: bold;
+        font-size: 20px;
+      }
+      p .target1 {
+        background-color: cadetblue;
+        font-size: 20px;
+      }
+
+
+      /* 인접 형제 Selector */
+      div + p {
+        background: lightgray;
+        color: orange;
+      }
+
+      /* 일반 형제 Selector가 우선순위 높음  */
+        div.target ~ p { 
+        background: green;
+        color: skyblue;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <h2>h2 Type Selector h2</h2>
+    <div>div Type Selector div</div>
+    <p>p Type Selector p</p>
+
+    <br>
+    <hr>
+    <br>
+    <h2>h2 Class Selector h2</h2>
+    <div class="target1">div Class Selector div</div>
+    <p class="target2">p Class Selector p</p>
+    <p class="target1">p Class Selector p</p>
+    <p> <span class="target1">p Class Selector p</span></p>
+
+
+    <br>
+    <hr>
+    <br>
+    <div>div Adjacent Sibling Selector div</div>
+    <p>div + p 1 Adjacent Sibling Selector</p>
+    <p>div + p 2 Adjacent Sibling Selector</p>
+    <div class="target">div General Sibling Selector</div>
+    <p>target ~ p 1 General Sibling Selector</p>
+    <p>target ~ p 2 General Sibling Selector</p>
+    <div>div Sibling Selector</div>
+    <p>target ~ p 3 General Sibling Selector</p>
+  </body>
+</html>
