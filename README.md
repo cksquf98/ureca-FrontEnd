@@ -1,2 +1,2 @@
 # ureca-FrontEnd
-LG유레카 프론트엔드 파트
+![Schedule_July](https://github.com/user-attachments/assets/1c072ab0-d9d1-4e72-9557-1ccd659d0a9e)
