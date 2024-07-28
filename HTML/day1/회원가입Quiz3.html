@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <h2>form control test - 회원가입</h2>
+    <form>
+    <!-- 크게 10행 2열의 테이블임 -->
+    <table border="1" width = "500">
+    <tr>
+        <td>이름</td>
+        <td><input type="text" id="name" value="이름"></td>
+    </tr>
+    <tr>
+        <td>아이디</td>
+        <td>
+            <input type="text" id="id" value="아이디">
+            <button type="submit">중복확인</button>
+        </td>
+    </tr>
+    <tr>
+        <td>비밀번호</td>
+        <td><input type="password" id="password"></td>
+    </tr>
+    <tr>
+        <td>비밀번호 확인</td>
+        <td><input type="password" id="password"></td>
+    </tr>
+    <tr>
+        <td>성별</td>
+        <td>
+            <!-- name으로 묶어야 그룹 인식이 되고 둘중 하나만 선택 가능함 -->
+            <input type="radio" name="gender" checked>남
+            <input type="radio" name="gender">여
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="center">좋아하는 과일</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="checkbox" name="fruit" checked>사과
+            <input type="checkbox" name="fruit">수박
+            <input type="checkbox" name="fruit">딸기
+            <input type="checkbox" name="fruit">포도
+        </td>
+    </tr>
+    <tr>
+        <td>이메일</td>
+        <td>
+            <input type="email"> @ 
+            <select>
+                <option>네이버</option>
+                <option>다음</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>연락처</td>
+        <td>
+            <select>
+                <option>02</option>
+                <option>010</option>
+                <option>070</option>
+            </select>
+            -
+            <input type="text" size="4">
+            -
+            <input type="text" size="4">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button type="submit">회원가입</button>
+            <button type="reset">초기화</button>
+        </td>
+    </tr>
+    </table>
+    </form>
+</body>
+</html>
