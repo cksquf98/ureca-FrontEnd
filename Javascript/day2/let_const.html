@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+      자바스크립트 변수(ECMA6 추가)
+        let
+        - ECMA6 부터 선언된 블럭에서만 사용할 수 있는 블록변수(let)가 제공됨
+        - 호이스팅 대상에서 제외
+        - 중복선언 불가능
+      */
+    var msg = 1;
+    if (msg === 1) {
+      let msg = 2; // 호이스팅 대상에서 제외됨
+      console.log(msg); // 2
+    }
+    console.log(msg); // 1
+
+    {
+      let msg2 = 3; // 호이스팅 대상에서 제외됨
+      console.log(msg2); // 3
+    }
+    console.log(msg2);     // not defined 에러발생함
+
+    let msg3 = 3;
+    // let msg3 = 4;      //  Identifier 'msg3' has already been declared
+
+
+
+     /**
+      const
+      - 상수로 사용(값을 할당하면 값을 변경할 수 없다.)
+      - 선언시 값을 할당해야 한다.
+      - {} 이 스코프로 처리된다.
+      - 호이스팅에서 제외된다.
+      - let 키워드와 값을 변경할 수 없다는 것만 제외하고 동일한 기능 처리됨  
+    */
+    const msg1 = '상수';
+    msg1 = "상수2";      //  TypeError: Assignment to constant variable.
+    console.log(msg1);
+
+    // const msg2;             //  SyntaxError: Missing initializer in const declaration
+    // msg2 = "선언시 값을 할당해야 한다.";
+    // console.log(msg2);
+  </script>
+</body>
+
+</html>

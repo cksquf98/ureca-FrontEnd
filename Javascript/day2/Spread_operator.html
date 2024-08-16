@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       /*
+	   Spread Operator 기본
+	   ==> 반복 가능한(iterable) 객체에 적용할 수 있는 문법 
+	   ==> 배열이나 문자열 등을 요소 하나 하나로 전개시킬 수 있음.
+	   */
+
+       let arr1=["길동","라임","주원"];
+       let arr2=[...arr1,"유신","감찬"]; // ...arr1 : arr1에 저장된 값을 뿌려줌 => arr2.length = 5
+       console.log(arr2);
+
+       let str1="ssafy";
+       let str2=[...str1]; //문자 배열
+       let str3={...str1}; //key = index, value = 문자
+       console.log(str2);
+       console.log(str3);
+
+       //배열 병합
+       let arr3=["길동","라임","주원"];
+       let arr4=["유신","감찬"];
+       let arr5=[...arr3,...arr4];
+       let arr6=["vue",...arr3,"JS"];
+       console.log(arr5);
+       console.log(arr6);
+
+       //매개변수
+       function sum(...param){
+          let i=0;
+          for(let num of param){
+              i+=num;
+          }
+          return i;
+       }
+       console.log(sum(11)); //11
+       console.log(sum(11,22)); //33
+       console.log(sum(11,22,33)); //66
+
+       //함수호출 인자
+       let numbers=[44,55,66];
+       console.log(Math.min(...numbers)); //44
+
+       //destructuring
+       let [a,b,...sp]=[100,200,300,400,500];   //...sp : 나머지 배열 처리
+    //    let [a,...sp,b] => error
+       console.log(a);     
+       console.log(b);     
+       console.log(sp);     
+
+       let {aa,bb, ...spsp}={aa:'길동',bb:13, ssafy:'안녕',location:'대한민국'};
+       console.log(aa);
+       console.log(bb);
+       console.log(spsp);
+
+
+    </script>
+</body>
+</html>
