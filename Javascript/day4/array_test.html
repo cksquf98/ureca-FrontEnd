@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Array</title>
+</head>
+<body>
+<script>
+  //1번
+  {
+    const subject = new Array('HTML', 'CSS', 'javascript');
+    console.log('#1', subject[0]);
+  }
+  {
+    const subject = ['HTML', 'CSS', 'javascript'];
+    console.log('#2', subject[1]);
+  }
+  {
+    const subject = [
+      'HTML',
+      'CSS',
+      'javascript'
+    ];
+    
+    console.log('#3', subject.length);
+    console.log('#3', subject[subject.length - 1]);
+  }
+
+  const userName = ['hong','kim','gil']
+  document.write("배열 길이: "+userName.length) //3
+  
+
+
+
+
+  //2번
+  const myArray = [
+    '문자열',
+    25,
+    function() {//얘 호출하려면? => myArray[2]()로 호출
+      alert('함수');
+    },
+    function() {
+      return '함수';
+    },
+    setTimeout(function() {//1초 후 실행되는 콜백함수임
+      alert('setTimeout');
+    }, 1000)
+  ];
+
+  console.log(typeof myArray); //object
+  console.log('myArray[0]', myArray[0]);
+  console.log('myArray[1]', myArray[1]);
+  console.log('myArray[2]', myArray[2]()); //alert들어있는 함수 호출
+  console.log('myArray[3]', myArray[3]()); //'함수' 리턴
+  console.log('myArray[4]', myArray[4]);
+
+
+</script>
+</body>
+</html>
