@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js</title>
+</head>
+<body>
+    <h3>자바스크립트 테스트</h3>
+    <script>
+        //프로그램 영역
+        var v;
+        v = '유레카';
+        v = 1000;
+        v = new Date();
+        
+        //변수 데이터 확인 
+        //by 브라우저 출력 : document.write 많이 쓰이진 않음
+        document.write("<font color = blue> v는 " + v + "</font>");
+
+        //by 메세지창 : 마크업 적용 X
+        // alert("v는 " + v)
+
+        //by 콘솔 : 제일 많이 사용됨 -> F12 개발자창 콘솔에 뜸
+        console.log("console 출력 >> v는 " + v);
+        console.log("console 출력 >> v는 ",v,"입니다"); //콤마 == 띄어쓰기
+        console.log("변수 v의 자료형은",typeof(v));
+        console.dir(v); //Date에 대한 생성자, 메서드들을 보여줌
+        console.log('현재시간 :',v.getHours(),'시',v.getMinutes,'분');
+    </script>
+</body>
+</html>

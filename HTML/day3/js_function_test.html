@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function 호출 테스트</title>
+    <script src="../JS/my.js"></script>
+    
+    <!-- <script src="../JS/my.js">  src로 불러오는 경우 하단에 다른 메서드를 정의하면 무시됨--> 
+    <script>
+        
+        function hello() {
+            alert('안녀엉');
+        }
+
+        function hello() {
+            alert('하이루');
+        }
+
+        function hello(name){
+        // if(name==undefined)
+        //  alert('봉쥬르');
+        // else
+        //  alert('봉쥬르,'+name);
+        if(name)
+          alert('봉쥬르,'+name);
+        else
+          alert('봉쥬르');
+       }
+    </script>
+</head>
+<body>
+    <h3>함수 호출 테스트</h3>
+    <script>
+        // hello();
+        // hello("이름");
+        // good();
+    </script>
+
+    <button onclick="var v=100;hello()">hello함수 호출 버튼</button>
+    <input type="button" value="good함수 호출 버튼" onclick="good()">
+</body>
+</html>
