@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>getElementById()</title>
+  
+  <!-- 
+  <script>
+    document.getElementById('two').style.backgroundColor = 'lightblue';
+
+    const list = document.getElementById('four');
+    console.log(list);
+    console.log(typeof list);
+    list.style.backgroundColor = 'lightcoral';
+  </script> 
+  
+  script가 먼저 실행되어서 getElement 정상 동작 못함
+  -->
+
+   <!-- 
+  <script>
+    window.onload = function() { }  //로드되면 실행
+
+    document.getElementById('two').style.backgroundColor = 'lightblue';
+
+    const list = document.getElementById('four');
+    console.log(list);
+    console.log(typeof list);
+    list.style.backgroundColor = 'lightcoral';
+  </script> 
+
+  -->
+</head>
+<body>
+  <div class="container">
+    <ul class="list-group">
+      <li class="list-group-item">첫 번째</li>
+      <li id="two" class="list-group-item">두 번째</li>
+      <li class="list-group-item">세 번째</li>
+      <li id="four" class="list-group-item">네 번째</li>
+      <li class="list-group-item">다섯 번째</li>
+    </ul>
+  </div>
+  
+  <script>
+    document.getElementById('two').style.backgroundColor = 'lightblue';
+
+    const list = document.getElementById('four');
+    console.log(list);
+    console.log(typeof list);
+    list.style.backgroundColor = 'lightcoral';
+  </script>
+</body>
+</html>

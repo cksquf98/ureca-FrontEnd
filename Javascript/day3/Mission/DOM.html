@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 
+1. 버튼을 눌렀을 때 브라우저 버튼 하단에 '유레카'를 출력하시오
+2. 버튼을 누를때마다 브라우저 버튼 하단에 '유레카'를 번호와 함께 출력하시오
+    유레카1
+    유레카2
+    유레카3 ..
+
+3. 버튼을 눌렀을 때 유레카를 번호와 함께 출력하고, 텍스트 옆에 삭제 버튼을 함께 출력하시오
+
+4. 삭제버튼을 눌렀을때 누른 삭제버튼과 함께 옆에 유레카 텍스트가 삭제되도록 하시오
+-->
+
+
+<body>
+    <div>
+        <button id="createBtn">유레카버튼</button>
+    </div>
+    <div>
+    <button id="createNumBtn">유레카번호버튼</button>
+    </div>
+    <div>
+        <button id="addRemoveBtn">유레카번호+삭제버튼</button>
+    </div>
+</body>
+<script>
+    //1번
+    document.querySelector('#createBtn').onclick = function() {
+        var pNode = document.createElement('p')
+        var txtNode = document.createTextNode('유레카')
+
+        pNode.appendChild(txtNode)
+
+        document.querySelector('div:nth-child(1)').appendChild(pNode)
+    }
+
+    //2번
+    let index_2 = 1
+    document.querySelector('#createNumBtn').onclick = function() {
+        var pNode = document.createElement('p')
+        var txtNode = document.createTextNode(`유레카-${index_2++}`)
+        //이케 안하고 pNode.innerHTML로 써도 됨
+
+        pNode.appendChild(txtNode)
+
+        document.querySelector('div:nth-child(2)').appendChild(pNode)
+    }
+
+    //3번
+    let index_3 = 1
+    document.querySelector('#addRemoveBtn').onclick = function() {
+        var pNode = document.createElement('p')
+        var txtNode = document.createTextNode(`유레카-${index_3++} `)
+
+        var delBtn = document.createElement('button')
+        var btnTxt = document.createTextNode('삭제')
+
+        delBtn.appendChild(btnTxt)
+
+        pNode.appendChild(txtNode)
+        pNode.appendChild(delBtn)
+
+        document.querySelector('div:nth-child(3)').appendChild(pNode)
+    }
+
+
+    //4번
+    document.querySelector('.remove').onclick = function() {
+        //버튼 생성할 때 setAttribute 메서드 써서 p태그 속성 저장하면 될거가튼디
+        // => 부모노드 찾아서 그 부모의 부모 노드로부터 삭제 << .parentNode속성 활용 >>
+
+        //3번에서 부모노드.removeChild(자식노드) 메서드 사용 & 버튼 속성까지 필요하니까 innerHTML쓰는게 나음
+
+
+    }
+
+</script>
+</html>

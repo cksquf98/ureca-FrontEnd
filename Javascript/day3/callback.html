@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>함수(function)</title>
+</head>
+<body>
+  <div class="container">
+    <div class="input-group mb-3">
+      <input type="text" name="sum1" class="form-control" placeholder="결과1">
+      <input type="text" name="sum2" class="form-control" placeholder="결과2">
+      <input type="text" name="sum3" class="form-control" placeholder="결과3">
+    </div>
+  </div>
+  <script>
+    {//블록1
+      function showResult(sum) {
+        var msg = '결과는 ' + sum + ' 입니다.';
+        document.querySelector('input[name="sum1"]').value = msg;
+      }
+
+      function plusOperation(x, y) {
+        return x + y;
+      }
+
+      const result = plusOperation(2, 3);
+
+      showResult(result);
+    }
+
+    {//블록2 (블록1 영향 안받음)
+      function showResult(sum) {
+        var msg = '결과는 ' + sum + ' 입니다.';
+        document.querySelector('input[name="sum2"]').value = msg;
+      }
+
+      function plusOperation(x, y) {
+        showResult(x + y);
+      }
+
+      plusOperation(4, 5);
+    }
+
+    {
+      function showResult(sum) {
+        var msg = '결과는 ' + sum + ' 입니다.';
+        document.querySelector('input[name="sum3"]').value = msg;
+      }
+
+      function plusOperation(x, y, callback) {
+        callback(x + y); //callback함수(전달된 showResult) 실행
+      }
+
+      //***매개변수로써의 함수 <- 이름만 넣어줘야함***
+      plusOperation(6, 7, showResult);
+
+    //plusOperation(6, 7, function (sum) {
+    //     var msg = '결과는 ' + sum + ' 입니다.';
+    //     document.querySelector('input[name="sum3"]').value = msg;
+    //   });
+    }
+  </script>
+</body>
+</html>

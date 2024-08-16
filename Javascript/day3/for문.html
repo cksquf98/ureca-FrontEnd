@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script>
+      document.write("<h3>for문</h3>");
+      var arr = [1, 2, 3, 4, 5];
+      for (var i = 0; i < arr.length; i++) {
+         document.write(i + " ");
+      }
+      ///////////////////////////////////////////
+      document.write("<hr>")
+
+      document.write("<h3>for~in문</h3>");
+
+
+      for (var i in arr) {
+         document.write(i + " ");
+      }
+      document.write("<br>");
+
+      var set = new Set([10, 30, 50, 30]);
+
+      for (var value in set) {
+         document.write(value + "<br>");
+      }
+
+      var ob = { "name": "홍길동", "age": 16 };
+
+      for (var i in ob) {
+         document.write(ob[i] + "<br>");
+      }
+
+
+      ///////////////////////////////////////////
+      document.write("<hr>");
+      document.write("<h3>for~of문</h3>");
+
+      for (var value of arr) {
+         document.write(value + " ");
+      }
+
+      document.write("<br>");
+
+      for (var value of set) {
+         document.write(value + " ");
+      }
+
+      //에러
+      // for (var value of ob) {
+      //    document.write(value + "<br>");
+      // }
+
+      document.write("<hr>");
+      document.write("<h3>forEach문</h3>");
+      arr.forEach(function (value, index) {
+         document.write(value + "(" + index + ")");
+      });
+      document.write("<br>");
+
+      set.forEach(function (value, index) {
+         document.write(value + "(" + index + ")");
+      });
+      document.write("<br>");
+
+      //에러
+      // ob.forEach(function (value, index) {
+      //    document.write(value + "(" + index + ")");
+      // });
+
+   </script>
+</body>
+
+</html>
