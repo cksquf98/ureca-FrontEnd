@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>데이터값 얻어오기</title>
+   <script>   
+    function printData(){
+      //  alert("아이디 :"+document.getElementsByName("id")[0].value+"\n"+
+      //   `비밀번호 : ${document.getElementsByName("pwd")[0].value} \n`+
+      //   `좋아하는 과일 :  \n`+
+      //   `강의실 :  \n`+
+      //   `나보여 : ${document.getElementsByName("hide")[0].value} \n`+
+      //   `파일 : ${document.getElementsByName("myfile")[0].value} \n`+
+      //   `운동 : ${document.getElementsByName("sports")[0].value} \n`+
+      //   `비고 : ${document.getElementsByName("note")[0].value} \n`
+      //   );
+
+
+
+
+      //방법1 > document.폼이름.inputElement.value => 폼에 대해서만 가져올 수 있다는 한계점
+      var id = document.frm.id.value   
+      //방법2 > selector
+      var pw = document.querySelector("input[name=pwd]").value //input태그 내 속성 name이 pwd인 엘리먼트의 value
+
+
+      //radio에서 선택된거 확인하기
+      // document.frm.room => 여러개이기 때문에 Array임
+
+      var roomName
+      for (let i = 0; i < document.frm.room.length; i++) {
+         if(document.frm.room[i]) {
+            roomName = document.frm.room[i]
+         }
+      }
+
+
+      //checkbox중 체크된거 확인하기 -> name이 다 달라서 따로 접근해야됨
+      // => 같은 name으로 묶어서 배열로 접근하는게 편함
+      var appleCheck = document.frm.apple.checked //사과 체크되어 있으면 true
+      
+      var fruit = ''
+      if(document.frm.apple.checked) {
+         fruit += '사과 '
+      }
+      if(document.frm.straw.checked) {
+         fruit += '딸기 '
+      }
+      if(document.frm.banana.checked) {
+         fruit += '바나나'
+      }
+
+
+
+      alert(`아이디 ▶ ${id}
+            비밀번호 ▶ ${pw}
+            좋아하는 과일 ▶ ${fruit}
+            당신의 강의실 ▶ ${roomName}
+            나보여 ▶ ${document.querySelector("input[name=hide]").value}
+            파일 업로드 ▶ ${document.frm.myfile.value}
+            운동 ▶ ${document.frm.sports.value}
+            비고▶ ${document.frm.note.value}
+      `)
+
+    }//printData
+   </script>
+</head>
+<!-- getDataTest.html -->
+<body>
+   <h3>데이터값 얻어오기</h3>
+   <hr>
+   <form name="frm">
+         아이디 : <input type="text" name="id" placeholder="아이디입력"><br>
+         비밀번호: <input type="password" name="pwd"><br>
+         좋아하는 과일: 
+                 <input type="checkbox" name='apple' value="풋사과"/>사과
+                 <input type="checkbox" name="straw" value="딸기">딸기
+                 <input type="checkbox" name="banana" value="바나나">바나나          
+                 <br>
+         당신의 강의실: <input type="radio" name="room" 
+                        value="1강의실"> 1강의실
+                 <input type="radio" name="room" 
+                        value="2강의실"> 2강의실
+                 <input type="radio" name="room"
+                        value="3강의실"> 3강의실      
+                 <input type="radio" name="room"
+                        value="4강의실"> 4강의실
+                 <br>            
+          나보여? <input type="hidden" value="지킬박사와 하이드" name="hide">     
+            <br>                   
+         파일업로드: <input type="file" name="myfile">
+      <!-- 로컬PC(사용자PC)에 있는 파일을 서버(PC)에 올릴때(전송할때) 사용 -->
+            <br> 
+         운동: <select name="sports">
+                  <option value="baseball">야구</option>  
+                  <option>축구</option>  <!--value 명시 안된 경우 텍스트가 value의 디폴트임-->
+                  <option>농구</option>  
+                  <option>배구</option>  
+          </select>
+          <br> 
+         비고: <textarea rows="5" cols="10" name="note"></textarea>
+     <br>
+     <button type="button" onclick = "printData()">등록</button>
+   </form>
+</body>
+</html>
