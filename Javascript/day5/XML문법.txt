@@ -1,0 +1,184 @@
+※ XML문법(spec) 정리 ※ ----> well-formed(잘 구성된) XML문서!!
+---> XML ?  표준데이터, text데이터
+                 -----> 운영체제, 프로그램, DB 종류 가리지 않고 사용.
+                 -----> 데이터 저장하는 형식
+                 
+---> 데이터는 
+       ==> 시작태그와 끝태그 사이에 정의 (content)
+       ==> 시작태그 또는 끝태그의 속성값으로 정의
+
+※ 용어정리 ※
+
+<table> 시작태그 (StartTag)
+</table> 끝태그   (EndTag)
+<br/>     빈태그   (EmptyTag)
+
+<table>
+   <tr>
+       <td>hello</td>
+   </tr>
+</table>
+==> 안에 있는 내용까지 포함 : 엘리먼트(Element)
+
+===================================================
+1. 최소 한개 이상의 element를 가져야 함.
+   test.xml   ===>   <A/>                 
+   
+2. 문서 전체를 감싸는 한 개의 엘리먼트(Root Element)가 있어야 함.
+   test.xml  ===>   <A/>
+                    	 <B/>
+                         ===> (X)
+                         
+   test.xml ===>    <ROOT>    
+                       		<A/>
+                       		<B/>
+                    	 </ROOT>
+                          ===> (O)                     
+                    
+3. 시작태그가 있다면 그것에 매핑되는 끝태그가 반드시 존재해야 함.
+   태그종류)
+      - 시작태그  <person>                    
+      - 끝태그    </person>                    
+      - 빈태그    <person/>                    
+                    
+  예)
+      <root>
+          <br>
+      </root>
+           ===> (X)
+      ----------------                            
+      <root>
+          <br></br>
+      </root>
+           ===> (O)                       
+      ----------------                            
+      <root>
+          <br/>
+      </root>
+           ===> (O)                       
+ 
+4. XML은 대소문자를 구분
+     <person>  </Person>   (X)  ----> 끝태그 없음 에러발생!!
+      
+     <person>  </person>   (O) 
+ 
+5. 엘리먼트는 포함관계가 꼬이면 안됨.
+    <a>
+        <b></b>
+        <c></c>
+    </a> 
+    ---> (O)   b,c엘리먼트(자식)는 a엘리먼트(부모)에 포함됨.
+               b와 c는 형제!!
+               
+    <a>
+       <b></b>
+       <c>
+    </a>               
+       </c>
+    ---> (X)  a,c엘리먼트 누가 부모이고 자식인지 알 수 없음 : 에러!!
+    
+6. xml선언은 전체 생략가능하나 선언하는 것을 권장.        
+  <?xml version='1.0' encoding='UTF-8'   ?>
+     ===> version은 생략 불가
+     ===> version속성을 먼저, encoding속성은 나중에 기술.  
+     ===> 속성값은 ''(작은따옴표) 또는 ""(큰 따옴표) 사용.
+     ===> '<?xml' 앞에 공백(whitespace)을 쓰면 절대 안됨!!!
+           
+7. 태그의 내용(content)에 제한된 문자가 있다.   <시작태그>내용</끝태그>
+   ===> '&'  '<'   ']]>'
+         ===> 사용하면 에러
+                  ===> 해결책) 
+                           - 제한된 문자를 replace()메소드로 변환
+                                    replace('<','&lt;')
+                           - CDATA섹션을 사용   <![CDATA[ 내용 ]]>                                 
+
+7-2. 속성값에 제한된 문자
+   ===> '&'  '<'
+
+8. 속성값은 반드시 인용부호(작은 따옴표, 큰 따옴표)를 반드시 사용.
+   HTML경우)  <table border=1  bgcolor=yellow></table>  (O)   
+   
+   XML경우)   <table border=1  bgcolor=yellow></table>      (X)   
+             <table border='1'  bgcolor="yellow"></table>  (O)
+   
+9. 서로 다른 속성은 반드시 공백을 통해 구분!!
+    <table border=1 cellpadding="5">    (X) 인용부호 없음
+    <table border='1'cellpadding="5">   (X) 속성명앞에 공백없음
+    <table border='1' cellpadding="5">  (O)
+    <table border='1' 
+    
+           cellpadding="5">             (O)   
+        
+10. 주석문(설명문,comment)에 제한된 문자
+    ===>  '--'
+    <!-- c-o-m-m-e-n- -t -->     (O)
+    <!-- comm--ent -->           (X)
+    
+----------------------------------------------------------------
+
+11. XML Spec에 맞게 작성된 문서를                                 -----> Well-Formed XML문서
+    + 추가적인 제한 사항,형식(DTD, XMLSchema)을 만족  -----> Validate 문서
+
+12. DTD(Document Type Definition)
+    ----> XML문서내에 출현할 태그와 속성에 대한 정의
+          (태그종류, 태그순서, 태그 포함관계, 태그내의 속성)
+          
+    - 엘리먼트(태그) 선언
+    <!ELEMENT 태그명 (태그내의 내용)>
+      예) <!ELEMENT tag (#PCDATA)>
+        ---> <tag>텍스트데이터</tag>
+        
+    <!ELEMENT tag (a,b,c)>          
+        ---> ','는 자식 태그간의 순서(sequence)를 표현
+        ---> <tag>
+                <a/>
+                <b/>
+                <c/>
+             </tag>
+             
+    <!ELEMENT tag (a|b|c)+>          
+        ---> '|'는 선택(choice)을 표현, 보통 순서없는 관계를 표현할 때 사용
+        ---> <tag>
+                <b/>
+                <c/>
+                <a/>
+             </tag>
+
+    <!ELEMENT tag EMPTY>
+        ---> <tag/>          
+
+    <!ELEMENT tag ANY>z
+        ---> <tag>
+                <a/>
+                <x/>
+                             안녕하세요
+                <gildong/>                             
+             </tag>          
+
+    - 속성선언
+    <!ATTLIST 태그명    속성명    속성자료형           기본선언>
+                           -------- 
+                           CDATA
+                           ID
+                           (남자|여자) : 열거데이터
+                           
+                           
+					                                       기본선언
+					                    --------
+					                     #REQUIRED    :필수요소
+					                     #IMPLIED     :옵션(생략가능)
+					                   (#FIXED)? 데이터 :고정데이터                                          
+    
+    
+        예)
+    <!ATTLIST tag a         CDATA       #REQUIRED           
+                  b         ID          #IMPLIED
+                  c         (남성|여성)   "여성"
+                  location  CDATA       #FIXED "서울"
+
+     ===>  <tag a="100"
+                b="x100"
+                c="남성"
+                location="서울"/>    
+                
+                

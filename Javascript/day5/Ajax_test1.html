@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX테스트</title>
+</head>
+<body>
+    <h3>Ajax test</h3>
+    <hr>
+    <div></div>
+    <button onclick="hello()">Click</button>
+    <button onclick="menu()">오늘의 희망메뉴</button>
+    <ul></ul>
+</body>
+<script>
+    //비동기 통신을 통해 서버에서 문자열 받아오기
+    const xhr = new XMLHttpRequest();
+    function hello() {
+        // xhr.open('GET','http://10.4.2.100:8080/res.jsp') //CORS **
+        // xhr.open('GET','user.txt') //현재폴더에 있는 텍스트 파일
+        xhr.open('GET','/img/ajax.txt')
+        
+        xhr.onreadystatechange = changeDiv
+        
+        xhr.send(null)
+    }
+
+    function changeDiv() {
+        // alert(xhr.readyState) //1,2,3,4 상태 출력
+
+        if(xhr.readyState == 4 && xhr.status == 200) {//(요청한 데이터 전체를 받은 상태) && (서버정상)
+        //응답 데이터 얻어오기
+        const str = xhr.responseText
+
+        //문서 조작
+        const div = document.querySelector('div') //div자료형: Element
+        div.innerHTML = str
+        }
+    }
+
+    // <미션> '희망메뉴' 버튼 클릭하면 서버에 메뉴 데이터를 요청하여 
+    // 현 페이지 div에 순서없는 목록으로 출력
+    // ==> 서버 데이터 페이지 : food.jsp
+
+    function menu() {
+        xhr.open('GET', 'http://10.4.2.100:8080/food.jsp')
+        xhr.onreadystatechange = changeDiv2
+        xhr.send(null)
+    }
+
+    function changeDiv2() {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            const ul = document.querySelector('ul')
+            console.log(xhr.responseText.trim().split(',')) //string[] 배열~~!
+
+            for (const str of xhr.responseText.trim().split(',')) {
+                var liNode = document.createElement('li')
+                liNode.innerHTML = str
+                ul.appendChild(liNode)
+            }
+        }
+    }
+
+</script>
+</html>

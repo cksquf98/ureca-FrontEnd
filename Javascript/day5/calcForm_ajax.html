@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>심플계산기</title>
+  <style type="text/css">
+    body {
+      text-align: center;
+    }
+
+    div {
+      color: blue;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    //$(document).ready(할일);
+    //$(할일);
+    $(function () {
+      $('button').click(function () {
+        let res = parseInt($('input[name=su1]').val()) + parseInt($('[name=su2]').val());
+        $('div').html("결과값=" + res);//innerHTML
+      });
+    });
+  </script>
+</head>
+<!--  calcForm.html -->
+
+<body>
+  <h3>jQuery심플계산기</h3>
+  <hr>
+  <input type="text" name="su1" size="5">
+  +
+  <input type="text" name="su2" size="5">
+  <button type="button">계산</button><br>
+  <div></div>
+</body>
+
+</html>

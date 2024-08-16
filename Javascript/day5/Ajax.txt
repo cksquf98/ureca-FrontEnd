@@ -1,0 +1,178 @@
+▣ JavaScript ▣
+- HTML문서내에서 동적페이지(DynamicWebPage)를 구성하는 용도로 사용.
+- 용도)
+    1. 문서조작(태그와 속성 또는 스타일조작)
+    2. 유효성 검사(사용자가 입력한 데이터가 프로그램에서 원하는 데이터인지를 체크)
+
+예) 
+   <div id="d1">이 영역이 div태그의 innerHTML영역입니다!!</div>
+   
+   <script>
+      var data='홍길동';
+      d1.innerHTML=data;
+   </script>    
+    
+    
+▣ Ajax(Asynchronous JavaScript and XML)▣
+- Ajax는 자바스크립트!!
+- 비동기서버통신 (   JavaScript                Java(JSP/Servlet)   )
+               	 -----------               ------------------
+                      클라이언트                                   서버
+                      		   <----------------->
+                                     통신 :데이터를 주고받기
+
+                      클라이언트   -------------->  서버
+       ?name=gildong&age=13                 request.getParameter("name");
+       
+       <form>
+          <input name=job>                  request.getParameter("job"); 
+       </form>
+       
+                       클라이언트   <--------------  서버
+       <form action=hello.jsp>
+       <a href=hello.jsp>
+       location.href=hello.jsp
+       -----------------------
+          URL요청 액션!!
+                                        ---------- hello.jsp --------
+                                        <%@page pageEncoding='UTF-8'
+                                          import="java.util.Calendar"  %>
+                                        <html>
+                                          <body>
+                                             안녕하세요 오늘의 날짜를 알려드릴께요!!
+                                             <br>
+                                             <%= 2+3 %>
+                                             <hr>
+                                             <% Calendar c = Calendar.getInstance()
+                                                                                                %>                        
+                                              <%= c.get(Calendar.MONTH)+1%>월
+                                              <%= c.get(Calendar.DATE)%>일
+                                          </body>
+                                        </html>   
+                       <-----------------
+                    HTML텍스트(CSS,JS포함)응답
+                    
+---------- hello.jsp(HTML만!!) --------
+
+
+<html>
+  <body>
+     안녕하세요 오늘의 날짜를 알려드릴께요!!
+     <br>
+     5
+     <hr>
+          7월
+          9일
+  </body>
+</html>                    
+
+
+
+
+
+- 단지 조작에 필요한 '데이터'가
+   현재 페이지가 아닌 외부문서(서버에 존재하는 문서)에 존재할 때 사용.
+   
+- ajax의 요청페이지는 웹브라우저에 보여지는 전체페이지가 아니고
+  요청HTML의 특정한 부분을 변경할 '부분 HTML'이다 
+   
+   
+   
+- XMLHttpRequest라는 객체를 통해 서버에게 필요한 데이터를 요청할 수 있음.
+
+예) 
+   <div id="d2">이 영역이 div태그의 innerHTML영역입니다!!</div>
+   
+   <script>
+      d1.innerHTML=server.jsp페이지 요청합니다!!;
+   </script>   
+-------------------------------------------------------
+server.jsp
+===> '홍길동' 출력!!
+
+▣  XMLHttpRequest(서버통신객체) xhr ▣ 
+   속성)
+     readyState : 0 (아무상태아님)
+                  -------요청---------------
+                  1 (open메소드호출-URL요청)
+                  2 (send메소드호출-파라미터전달)
+                  
+                  -------응답---------------
+                  3 (요청한 데이터를 일부분 받는 중)
+                  4 (요청한 데이터를 전체 받았을때)
+                  -------------------------
+     onreadystatechange : 이벤트속성(readyState값이 변경되었을때를 이벤트!!)
+     status : 서버의 상태                  
+             (예==> 200:정상상태
+                   403:요청 권한 없음
+                   404:요청 페이지 없음
+                   405:요청한 메소드(doGet, doPost)가 준비되지 않았음
+                   500:요청한 페이지가 서버에서 실행 중(runtime시) 에러발생)
+   메소드)
+     open('HTTP요청방식','요청URL',비동기방식)
+     send('요청URL에게 전달할 데이터');
+           ----> send(name=홍길동&age=13)
+   
+========================================================================
+▣ Ajax핵심코드
+
+<클라이언트>                               <서버>
+- JavaScript                         - JSP,Servlet(자바)
+- 데이터요청                        - 데이터 준비, 데이터 출력 out.print(데이터)
+          1.open(URL요청과 get방식의 데이터)  
+          ---------------------------->
+
+          2.send(post방식의 데이터)  
+          ---------------------------->
+          
+          3.responseText 또는 responseXML
+          <----------------------------
+              var v1= xhr.responseText;
+              var v2= xhr.responseXML;
+              
+             v1의 자료형? String
+             v2의 자료형? Document 
+           
+※ 위의 1,2,3번을 실행하기 위해서는 XMLHttpRequest(xhr)객체가 필요!!
+※ 3번(서버데이터 받기)은 콜백함수에 정의!!
+                   		------
+        		이벤트 발생 후 실행하는 함수
+                	-----
+               xhr을 통한 URL요청                      
+               
+               
+                                     
+new ActiveXObject("Msxml2.XMLHTTP");               
+new ActiveXObject("Microsoft.XMLHTTP");         
+
+new XMLHttpRequest();
+
+
+httpRequest = getXMLHttpRequest();
+httpRequest.onreadystatechange = viewMessage; //콜백함수
+httpRequest.open("GET", url, true);
+httpRequest.send(null);
+
+
+httpRequest.open(httpMethod, httpUrl, true);
+httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); //웹서버에 전송할 컨텐트타입지정       
+httpRequest.onreadystatechange = callback; //호출될 콜백함수 지정
+httpRequest.send(httpMethod == 'POST' ? httpParams : null);
+
+
+
+
+
+▣ jQuery 의 ajax함수 정리
+
+$.ajax({ key:value  });
+
+<ajax함수에 사용되는 key>
+url:            //요청url
+type:          //HTTP요청 방식 서술. ('GET','POST')
+data:          //서버에 전달할 파라미터 데이터의 의미.
+dataType:     //서버로부터 전달받는(출력한) 데이터의 자료형을 명시. (xml, json, script, or html)
+success: 콜백함수  ( Anything data, String textStatus, jqXHR jqXHR )
+error:콜백함수  ( jqXHR jqXHR, String textStatus, String errorThrown )
+
+==> 가장많이 사용되는 key : url, data, success콜백
