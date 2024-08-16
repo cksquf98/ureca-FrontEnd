@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery Ajax요청테스트(전체페이지)</title>
+  <!-- For jQuery 사용 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+
+     const URL='http://10.4.2.100:8080';
+
+     function load1(){
+        //$.ajax();
+        $.ajax({url:`${URL}/response/response1.jsp`,
+        	    success:function(data){
+        	    	console.log(data);
+        	    	console.log(typeof(data)); //string
+        	    	//$('div').text(data);
+        	    	//$('#d1').html(data);
+        	    	//let arr = data.split(",");//arr==>배열
+        	    	
+          		  //$('li').each(); //li태그 수만큼 반복!!
+          		  //$.each(배열);    //배열의 수만큼
+          		   var ul = $('<ul></ul>')
+          		   $.each(data.split(','),function(index,value){
+          			  ul.append($('<li></li>').text(value));
+          			  //부모.append(자식);
+          			     // <ul><li>Hello</li></ul>
+          			     // <ul><li>Hello</li><li>Ajax~!!</li></ul>
+          		   });
+          		// <ul><li>Hello</li><li>Ajax~!!</li></ul>
+          		   $('div').html(ul);
+        	    }
+               });
+        
+     }//load1함수
+     
+     
+     
+     //$(document).ready(
+        //버튼이 클릭되었다면
+        //$.ajax();
+     //);
+     $(function(){
+    	 
+    	 $('button:eq(1)').click(function(){//0인덱스: 첫번째 버튼
+      	   //alert('두번째 버튼');
+             $.ajax({
+          	    url:'http://10.4.2.100:8080/response/response2.jsp',
+          	    data:{
+          	    	username: $('#uname').val()
+          	    	//username: $('input[name=uname]').val()
+          	    },
+
+          	    success:function(result){
+          	    	$('div').html(result)
+          	    },
+
+				error:function(jqueryXHR, msg) {
+					alert(jqueryXHR, jqueryXHR.status, jqueryXHR.statusText)
+					alert(msg)
+				}
+             })
+         })//두번째버튼 클릭시
+        
+         $('button:eq(2)').click(function(){
+             $.ajax({
+          	    url:'http://10.4.2.100:8080/response/response3.jsp',
+          	    data:{username: $('#uname').val()} ,
+          	    success:function(result){
+          	    	$('div').text(result);
+          	    }
+             });
+         });//세번째버튼 클릭시         
+         
+         
+         $('button:eq(3)').click(function(){//문서내의 4(3인덱스)번째 버튼 클릭시
+             $.ajax({
+          	    url:'http://10.4.2.100:8080/response/response4.jsp',//XML출력
+          	    success:function(doc){
+          	    	//result의 타입?
+          	        //alert(typeof(doc));
+          	    	//doc: Document객체!!
+          	    	
+          	    	/*
+          	    	<title>AjaxProgramming</title>
+          	    	<title>jQueryLibrary</title>
+          	    	*/
+          	      var ol = $('<ol>');	
+          	      $(doc).find('title').each(function(idx,titleEle){
+          	    	 //alert($(this).text());//AjaxProgramming
+
+          	    	 var li = $('<li>').text($(this).text());
+          	    	 //<li>AjaxProgramming</li>
+
+          	    	 ol.append(li);//<ol><li>AjaxProgramming</li></ol>
+          	      });
+          	      $('div').html(ol);
+          	    }
+                  //,data:     //서버에 전달할 파라미터 데이터의 의미.
+                  //,type:  생략   //HTTP요청 방식 서술.
+                  //,dataType:'xml' 생략 //서버가 전달받는(출력한) 데이터의 자료형을 명시.
+             });
+         });//네번째버튼 클릭시
+         
+         
+         $('button:eq(4)').click(function(){//문서내의 5(4인덱스)번째 버튼 클릭시
+             $.ajax({
+          	    url:'http://10.4.2.100:8080/response/response5.jsp',//JSON출력{}
+          	    success:function(result){
+          	       //dataType:'json'명시했을때 string ---> json으로 변환!!
+          	       //result=JSON변수명!!
+          	       //var v = {uname:'김주원', data1:{age:15}};
+          	       //v:JSON변수명  ==> v.uname
+          	       //v.data1:JSON변수명  ==> v.data1.age
+          	       
+          	       var htmlTxt='이름:'+result.name
+          	                 +'<br>나이:'+result.age
+          	                 +'<br>직업:'+result.job;
+          	       $('div').html(htmlTxt);
+          	    }
+                  ,dataType:'json' //서버가 전달받는(출력한) 데이터의 자료형을 명시.
+             });
+         });//다섯번째버튼 클릭시 
+         
+         
+         $('button:eq(5)').click(function(){//문서내의 6(5인덱스)번째 버튼 클릭시
+             $.ajax({
+          	    url:'http://10.4.2.100:8080/response/response6.jsp',//Array출력[{},{},{}]
+          	    success:function(arr){
+          	        //console.log('arr의 자료형>>>'+ typeof(arr));
+             		//dataType:'json'을 명시하는 순간 arr자료형==> string 에서  Array변환
+             
+                    var htmlTxt='<font color=red><ol>';
+                    for(var i=0; i<arr.length; i++){
+                  	  //arr[i] == JSON
+                  	   htmlTxt += '<li>'+arr[i].title+'</li>'
+                    }
+                    htmlTxt += '</ol></font>';
+                    $('div').html(htmlTxt);
+          	    }
+                  ,dataType:'json' //서버가 전달받는(출력한) 데이터의 자료형을 명시.
+             });
+         });//여섯번째버튼 클릭시 
+         
+     });//document.ready
+     
+  </script>
+</head>
+<!-- 
+      request.html 
+     (요청페이지- 서버에서 데이터를 URL요청, jQuery Ajax사용!!)
+-->
+<body>
+    이름: <input type="text" name="uname" id="uname"> <br>
+  <button onclick="load1()">response1요청(HTMLtext)</button><br>
+  <button>response2요청(HTMLtext)</button><br>
+  <button>response3요청(text,plain)</button><br>
+  <button>response4요청(XML)</button><br>
+  <button>response5요청(JSON)</button><br>
+  <button>response6요청(JSON배열)</button><br>
+  <h3>결과출력</h3>
+  <hr>
+  <div id="d1"></div>
+</body>
+</html>
+
+
+
+

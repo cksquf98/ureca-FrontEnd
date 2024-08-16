@@ -1,0 +1,149 @@
+<!-- URL 로컬호스트로 고쳐야함 지금은 강사님 서버 IP들어가있는 코드임 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax요청테스트(전체페이지)</title>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <script>
+    function load1(){
+      // fetch('response/response1.jsp');
+      fetch('http://10.4.2.100:8080/response/response1.html')
+       .then(function(response){
+              console.log(response);
+              // console.log(response.text());
+
+              if(!response.ok) {//응답이 정상이 아닌 경우
+                  throw new Error("에러발생!") //에러메세지 리턴 -> catch문으로 throw
+              }
+
+              return response.text();
+       })
+       .then(function(data){
+             console.log(data);
+             var content="<ul>";
+                  data.split(",").forEach(element => {
+                      console.log(element);
+                      content+=`<li>${element}</li>`;
+                  });
+                  content+="</ul>";
+                  document.getElementById('d1').innerHTML=content;
+       })
+       .catch(function(err) {
+              alert('에러메세지: '+err)
+       })
+    }
+    function load2(){
+       fetch(`http://10.4.2.100:8080/response/response2.html?username=${document.querySelector("input[name=uname]").value}`)
+           .then(function(response){
+                  console.log(response);
+                  // console.log(response.text());
+                  return response.text();
+           })
+           .then(function(data){
+                  console.log(data);
+                  var content=data;
+                  document.getElementById('d1').innerHTML=content;
+           });
+    }
+//     function load3(){
+//        fetch(`http://10.4.2.100:8080/response/response2.jsp?username=${document.querySelector("input[name=uname]").value}`)
+//            .then(function(response){
+//                   console.log(response);
+//                   // console.log(response.text());
+//                   return response.text();
+//            })
+//            .then(function(data){
+//                   console.log(data);
+//                   var content=data;
+//                   document.getElementById('d1').innerHTML=content;
+//            });
+//     }
+    function load4(){
+       fetch('http://10.4.2.100:8080/response/response4.xml')
+           .then(function(response){
+                  console.log(response);
+                  // console.log(response.text());
+                  return response.text();
+           })
+           .then(function(data){
+                  console.log(data);
+                  var parser = new DOMParser();
+                  var doc = parser.parseFromString(data,"application/xml");
+                  var titleList =doc.getElementsByTagName("title");
+
+
+                  var content="<ol>";                  
+                  for(var i=0; i<titleList.length; i++){
+                    console.log(titleList.item(i));
+                    console.log(titleList.item(i).textContent);
+                    content+=`<li>${titleList.item(i).textContent}</li>`;
+                  }
+                  content+="</ol>";
+                  document.getElementById('d1').innerHTML=content;
+           });
+    }
+    function load5(){
+       fetch('http://10.4.2.100:8080/response/response5.json')
+           .then(function(response){
+                  console.log(response);
+                  // console.log(response.text());
+                  return response.json();
+           })
+           .then(function(data){
+             //response.json() 명시했을때 string ---> json으로 변환!!
+                            //result=JSON변수명!!
+                            //var v = {uname:'김주원', data1:{age:15}};
+                            //v:JSON변수명  ==> v.uname
+                            //v.data1:JSON변수명  ==> v.data1.age
+                            
+                  console.log(data);
+                  
+                  var content='이름:'+data.name
+          	                 +'<br>나이:'+data.age
+          	                 +'<br>직업:'+data.job;
+
+                  document.getElementById('d1').innerHTML=content;
+           });
+    }
+    function load6(){//json 배열 데이터
+       fetch('http://10.4.2.100:8080/response/response6.txt')
+           .then(function(response){
+                  console.log(response);
+                  // console.log(response.text());
+                  return response.json();
+           })
+           .then(function(data){
+                  var content="<ol>";
+                  data.forEach(element => {
+                      console.log(element);
+                      console.log(element.title);
+                      content+=`<li>${element.title}</li>`;
+                  });
+                  content+='</ol>';
+                  document.getElementById('d1').innerHTML=content;
+           });
+    }   
+  </script>
+</head>
+<!-- 
+      request.html 
+     (요청페이지- 서버에서 데이터를 URL요청, fetch사용!!)
+-->
+<body>
+    이름: <input type="text" name="uname" id="uname"> <br>
+  <button onclick="load1()">response1요청(HTMLtext)</button><br>
+  <button onclick="load2()">response2요청(HTMLtext)</button><br>
+  <button onclick="load3()">response3요청(text,plain)</button><br>
+  <button onclick="load4()">response4요청(XML)</button><br>
+  <button onclick="load5()">response5요청(JSON)</button><br>
+  <button onclick="load6()">response6요청(JSON배열)</button><br>
+  <h3>결과출력</h3>
+  <hr>
+  <div id="d1"></div>
+</body>
+</html>
+
+
+
+
