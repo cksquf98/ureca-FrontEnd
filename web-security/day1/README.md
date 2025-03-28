@@ -127,7 +127,9 @@ Refresh Token
 ResponseEntity
 
 ```
-ResponseEntity란, httpentity를 상속받는, 결과 데이터와 HTTP 상태 코드를 직접 제어할 수 있는 클래스이다.ResponseEntity에는 사용자의  HttpRequest에 대한 응답 데이터가 포함된다.
-```<img width="661" alt="image" src="https://github.com/user-attachments/assets/21f97c10-943e-4e75-b80c-015fa67458b1" />
+ResponseEntity란, httpentity를 상속받는, 결과 데이터와 HTTP 상태 코드를 직접 제어할 수 있는 클래스이다.
+ResponseEntity에는 사용자의  HttpRequest에 대한 응답 데이터가 포함된다.
+```
+<img width="661" alt="image" src="https://github.com/user-attachments/assets/21f97c10-943e-4e75-b80c-015fa67458b1" />
 
 </aside>
